@@ -1,0 +1,222 @@
+/* =========================================
+   1. БАЗОВЫЕ НАСТРОЙКИ (Reset & Variables)
+   ========================================= */
+:root {
+    --primary-red: #8B1A1A;
+    --accent-gold: #DAA520;
+    --bg-cream: #FAF9F6;
+    --footer-bg: #2C2F33;
+    --text-dark: #222;
+    --text-muted: #666;
+    --text-light: #FFF;
+    --font-heading: 'Georgia', serif;
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background-color: #FFFFFF; /* Белый фон для всей страницы */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Кнопки --- */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    border: 2px solid var(--primary-red);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-red);
+}
+
+
+/* =========================================
+   3. СТРАНИЦА "ВАШИ ПЕРСОНАЖИ"
+   ========================================= */
+.page-content {
+    flex: 1; /* Позволяет футеру прижиматься к низу, если контента мало */
+    padding: 60px 0 80px; 
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 50px;
+}
+
+/* Сетка карточек */
+.characters-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* Обновленный общий стиль карточки */
+.char-card {
+    background-color: var(--bg-cream);
+    width: 200px;
+    padding: 30px 20px 20px; /* Немного уменьшили нижний отступ */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid transparent;
+    transition: var(--transition);
+    position: relative;
+}
+
+.char-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-color: var(--accent-gold);
+}
+
+/* Круглый аватар */
+.char-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-red);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #fff;
+    transition: var(--transition);
+}
+
+.char-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Имя персонажа */
+.char-name {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Карточка "Создать нового" */
+.char-new .char-avatar {
+    border-color: var(--text-dark);
+    background-color: transparent;
+}
+
+.char-new:hover .char-avatar {
+    background-color: var(--primary-red);
+    border-color: var(--primary-red);
+}
+
+.char-new .plus-icon {
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.char-new:hover .plus-icon {
+    color: #fff;
+}
+
+/* --- Внутренняя структура карточки --- */
+.char-main-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.char-main-link:hover .char-avatar {
+    transform: scale(1.05); /* Легкое увеличение аватара при наведении */
+}
+
+/* Уровень и Класс */
+.char-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+/* --- Кнопки управления (Изменить / Удалить) --- */
+.char-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 15px;
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid rgba(0,0,0,0.05); /* Легкая линия-разделитель */
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #999;
+    transition: var(--transition);
+    padding: 5px;
+}
+
+/* Цвета при наведении */
+.edit-btn:hover {
+    color: var(--accent-gold);
+    transform: translateY(-2px);
+}
+
+.delete-btn:hover {
+    color: var(--primary-red);
+    transform: translateY(-2px);
+}

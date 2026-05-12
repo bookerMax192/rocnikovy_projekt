@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character List — QuestForge</title>
+    <link rel="stylesheet" href="/styles/sheet.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="/img/logo.png" alt="QuestForge Logo">
+                QuestForge
+            </a>
+            
+            <input type="checkbox" id="mobile-menu" class="menu-checkbox">
+            
+            <nav class="nav-links">
+                <a href="/characterspage.html">CHARACTERS</a>
+                <a href="/guide.html">GUIDES</a>
+            </nav>
+            
+            <div class="header-actions">
+                <span class="lang-switch">EN</span>
+                <a href="login.html" class="btn btn-primary">SIGN IN</a>
+                
+                <label for="mobile-menu" class="burger-icon">☰</label>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="back-page-box">
+                <a href="/characterspage.html" class="back-link">← back to characters list</a>
+                <button class="btn btn-primary" id="save-character-btn">SAVE</button>
+            </div>
+
+            <div class="list-main-grid">
+                
+                <div class="list-header">
+                    <div class="char-name-container">
+                        <div class="name-box">
+                            <input class="name-input" placeholder="Name..." type="text">
+                        </div>
+                    </div>
+                    <div class="char-info-container">
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">CLASS & LEVEL</p>
+                        </div>
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">BACKGROUND</p>
+                        </div>
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">PLAYER NAME</p>
+                        </div>
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">RACE</p>
+                        </div>
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">ALIGNMENT</p>
+                        </div>
+                        <div class="char-info-box">
+                            <input class="info-input" type="text">
+                            <p class="char-main-info-label">EXPERIENCE POINTS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="left-section-container">
+                    <div class="all-main-stats-container">
+                        <div class="main-char-stats-container">
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">STRENGTH</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">DEXTERITY</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">CONSTITUTION</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">INTELLIGENCE</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">WISDOM</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                            <div class="main-stat-box">
+                                <div class="stat-val-box">
+                                    <p class="char-stat-label">CHARISMA</p>
+                                    <input class="char-stat-input" maxlength="2" type="text">
+                                    <div class="modify-box"><input class="modify-input" maxlength="2" type="text"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="char-skills-dice-containee">
+                            <div class="inspiration-container">
+                                <div class="insp-input-box"><input class="inspiration-input" type="text"></div>
+                                <div class="insp-label-box"><p class="insp-profic-label">INSPIRATION</p></div>
+                            </div>
+                            <div class="profic-bonus-container">
+                                <div class="profic-input-box"><input class="inspiration-input" type="text"></div>
+                                <div class="insp-label-box"><p class="insp-profic-label">PROFICIENCY BONUS</p></div>
+                            </div>
+
+                            <div class="save-throws-container">
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Strength</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Dexterity</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Constitution</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Intelligence</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Wisdom</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Charisma</p></div>
+                                <div class="skill-section-name-label"><p class="skill-main-label">SAVING THROWS</p></div>
+                            </div>
+
+                            <div class="skills-container">
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Acrobatics</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Animal Handling</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Arcana</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Athletics</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Deception</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">History</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Insight</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Intimidation</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Investigation</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Medicine</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Nature</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Perception</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Performance</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Persuasion</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Religion</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Sleight of Hand</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Stealth</p></div>
+                                <div class="save-throws-item-box"><input class="skil-checkbox" type="checkbox"><input class="skil-val-input" type="text"><p class="skill-name">Survival</p></div>
+                                <div class="skill-section-name-label"><p class="skill-main-label">SKILLS</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pass-wisdom-container">
+                        <div class="pass-wis-input-box"><input class="pass-wis-input" type="text"></div>
+                        <div class="insp-label-box"><p class="insp-profic-label">PASSIVE WISDOM (PERCEPTION)</p></div>
+                    </div>
+
+                    <div class="other-prof-lang-container text-box-area">
+                        <div class="large-text-input-box"><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">OTHER PROFICIENCIES & LANGUAGES</p></div>
+                    </div>
+                </div>
+
+                <div class="center-section-container">
+                    <div class="battle-container">
+                        <div class="batle-grid-container">
+                            <div class="armor-section-container">
+                                <div class="large-text-input-box-batle"><input class="batle-input" type="text"></div>
+                                <div class="skill-section-name-label"><p class="armor-main-label">ARMOR CLASS</p></div>
+                            </div>
+                            <div class="batle-section-container">
+                                <div class="large-text-input-box-batle"><input class="batle-input" type="text"></div>
+                                <div class="skill-section-name-label"><p class="skill-main-label">INITIATIVE</p></div>
+                            </div>
+                            <div class="batle-section-container">
+                                <div class="large-text-input-box-batle"><input class="batle-input" type="text"></div>
+                                <div class="skill-section-name-label"><p class="skill-main-label">SPEED</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cur-hits-container">
+                        <div class="curent-hits-box">
+                            <div class="total-hit-container">
+                                <p class="curent-hit-label">Hit Point Maximum</p>
+                                <div class="total-hit-input-box"><input class="total-hit-input" type="text"></div>
+                            </div>
+                            <div class="cur-hits-dice-box"><input class="cur-hits-dice" type="text"></div>
+                            <div class="skill-section-name-label"><p class="skill-main-label">CURRENT HIT POINTS</p></div>
+                        </div>
+                    </div>
+
+                    <div class="temp-hits-container text-box-area">
+                        <div class="large-text-input-box "><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">TEMPORARY HIT POINTS</p></div>
+                    </div>
+
+                    <div class="dices-container">
+                        <div class="deces-mini-box">
+                            <div class="total-hit-container">
+                                <p class="total-hit-label">Total</p>
+                                <div class="total-hit-input-box"><input class="total-hit-input" type="text"></div>
+                            </div>
+                            <div class="cur-hits-dice-box"><input class="cur-hits-dice" type="text"></div>
+                            <div class="skill-section-name-label"><p class="skill-main-label">HIT DICE</p></div>
+                        </div>
+
+                        <div class="deces-mini-box">
+                            <div class="saves-throws-container">
+                                <div class="save-line-box">  
+                                    <p class="total-hit-label">SUCCESSES</p>
+                                    <div class="curent-saves-throws-box">
+                                        <input class="death-chekbox" type="checkbox"><input class="death-chekbox" type="checkbox"><input class="death-chekbox" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="save-line-box">  
+                                    <p class="total-hit-label">FAILURES</p>
+                                    <div class="curent-saves-throws-box">
+                                        <input class="death-chekbox" type="checkbox"><input class="death-chekbox" type="checkbox"><input class="death-chekbox" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-section-name-label"><p class="skill-main-label">DEATH SAVES</p></div>
+                        </div>
+                    </div>
+
+                    <div class="attack-container">
+                        <div class="attack-top-section">
+                            <div class="main-weapon-container">
+                                <div class="main-atack-label-box"><p class="main-atack-label">NAME</p></div>
+                                <div class="main-atack-label-box"><p class="main-atack-label">ATK BONUS</p></div>
+                                <div class="main-atack-label-box"><p class="main-atack-label">DAMAGE/TYPE</p></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                                <div class="main-atck-input-box"><input type="text" class="main-atck-input"></div>
+                            </div>
+                            <div class="large-text-input-box-for-attack"><textarea class="large-text-input"></textarea></div>
+                        </div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">ATTACKS & SPELLCASTING</p></div>
+                    </div>
+
+                    <div class="equipment-container">
+                        <div class="equipment-top-section">
+                            <div class="money-container">
+                                <div class="coins-box"><div class="coin-name-box"><p class="coin-type-label">CP</p></div><div class="coin-val-box"><input class="coin-input" type="text"></div></div>
+                                <div class="coins-box"><div class="coin-name-box"><p class="coin-type-label">SP</p></div><div class="coin-val-box"><input class="coin-input" type="text"></div></div>
+                                <div class="coins-box"><div class="coin-name-box"><p class="coin-type-label">EP</p></div><div class="coin-val-box"><input class="coin-input" type="text"></div></div>
+                                <div class="coins-box"><div class="coin-name-box"><p class="coin-type-label">GP</p></div><div class="coin-val-box"><input class="coin-input" type="text"></div></div>
+                                <div class="coins-box"><div class="coin-name-box"><p class="coin-type-label">PP</p></div><div class="coin-val-box"><input class="coin-input" type="text"></div></div>
+                            </div>
+                            <div class="large-text-input-box-for-eauipment"><textarea class="large-text-input"></textarea></div>
+                        </div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">EQUIPMENT</p></div>
+                    </div>
+                </div>
+                
+                <div class="right-section-container">
+                    <div class="per-traits-container text-box-area">
+                        <div class="large-text-input-box"><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">PERSONALITY TRAITS</p></div>
+                    </div>
+                    <div class="ideals-container text-box-area">
+                        <div class="large-text-input-box "><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">IDEALS</p></div>
+                    </div>
+                    <div class="bonds-container text-box-area">
+                        <div class="large-text-input-box "><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">BONDS</p></div>
+                    </div>
+                    <div class="flaws-container text-box-area">
+                        <div class="large-text-input-box "><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">FLAWS</p></div>
+                    </div>
+                    <div class="features-container text-box-area">
+                        <div class="large-text-input-box "><textarea class="large-text-input"></textarea></div>
+                        <div class="skill-section-name-label"><p class="skill-main-label">FEATURES & TRAITS</p></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            
+            <div class="footer-block footer-info">
+                <div class="footer-logo">QuestForge<span>.</span></div>
+                <p>Your forge of heroes and adventures in the world of Dungeons & Dragons. Create, play, and conquer.</p>
+                <div class="social-links">
+                    
+                </div>
+            </div>
+            
+            <div class="footer-block footer-nav">
+                <h4>Contacts</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a>questforge@gmail.com</a></li>
+                </ul>
+                
+                
+                
+            </div>
+            
+            <div class="footer-block footer-nav">
+                <h4>Help</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="container footer-copyright">
+            <p>Copyright © 2025 QuestForge. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

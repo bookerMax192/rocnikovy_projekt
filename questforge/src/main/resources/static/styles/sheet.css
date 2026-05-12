@@ -1,0 +1,632 @@
+/* =========================================
+   БАЗОВЫЕ НАСТРОЙКИ И QUESTFORGE СТИЛИ
+   ========================================= */
+:root {
+    --primary-red: #8B1A1A;
+    --accent-gold: #DAA520;
+    --bg-cream: #FAF9F6;
+    --footer-bg: #2C2F33;
+    --text-dark: #222;
+    --font-heading: 'Georgia', serif; 
+    
+    /* Меняем Merriweather на стандартный шрифт сайта */
+    --font-sheet: 'Georgia', serif; 
+    --transition: all 0.3s ease;
+}
+
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+    font-family: var(--font-sheet);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+ul { list-style: none; padding: 0; }
+
+/* Кнопки QuestForge */
+.btn { display: inline-block; padding: 10px 24px; border-radius: 4px; font-weight: 600; cursor: pointer; font-family: var(--font-heading); text-transform: uppercase; }
+.btn-primary { background-color: var(--primary-red); color: #FFF; border: 2px solid var(--primary-red); }
+.btn-primary:hover { background-color: transparent; color: var(--primary-red); }
+.back-page-box { 
+    margin: 10px auto; 
+    width: 100%; 
+    max-width: 1050px; 
+    padding: 0 10px;
+    /* Добавляем Flexbox для выравнивания */
+    display: flex; 
+    justify-content: space-between; /* Раздвигаем ссылку и кнопку по краям */
+    align-items: center; /* Выравниваем их ровно по центру по вертикали */
+}
+
+#save-character-btn {
+    background-color: #2e6132; /* Глубокий зеленый */
+    border: 2px solid #2e6132;
+    color: #fff;
+}
+
+#save-character-btn:hover {
+    background-color: transparent;
+    color: #2e6132;
+}
+
+/* Шапка QuestForge */
+header { background-color: #fff; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; font-family: var(--font-heading); }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: bold; color: var(--primary-red); }
+.logo img { height: 35px; width: auto; }
+.nav-links { display: flex; gap: 30px; font-weight: bold; }
+.nav-links a:hover { color: var(--primary-red); }
+.header-actions { display: flex; align-items: center; gap: 20px; }
+.lang-switch { font-weight: bold; cursor: pointer; }
+
+/* Футер QuestForge */
+footer { background-color: var(--footer-bg); color: #ccc; padding: 60px 0 20px; font-family: var(--font-heading); }
+.footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+.footer-block { flex: 1; min-width: 250px; }
+.footer-logo { font-size: 1.8rem; color: #FFF; margin-bottom: 20px; }
+.footer-logo span { color: var(--accent-gold); }
+.footer-block h4 { color: #FFF; text-transform: uppercase; margin-bottom: 20px; font-size: 1rem; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a:hover { color: var(--accent-gold); }
+.footer-copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.85rem; }
+
+/* =========================================
+   ТВОЙ ЛИСТ ПЕРСОНАЖА (ОРИГИНАЛЬНЫЙ КОД)
+   ========================================= */
+p, input, textarea {
+    font-family: var(--font-sheet);
+    font-optical-sizing: auto;
+}
+
+input { background: none; border: none; text-align: center; padding: 0; }
+input:focus, textarea:focus { outline: none; }
+
+.page-content { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+.back-page-box { 
+    margin: 10px auto; /* Добавил auto, чтобы кнопка всегда центрировалась вместе с листом */
+    width: 100%; 
+    max-width: 1050px; /* Было 900px, стало 1050px */
+    text-align: left; 
+}
+.back-link { color: var(--primary-red); font-weight: 700; text-decoration: none; font-family: var(--font-heading); }
+.back-link:hover { text-decoration: underline; }
+
+/* Главная сетка листа (Адаптированная) */
+.list-main-grid {
+    width: 100%;
+    max-width: 1050px; /* Было 900px, стало 1050px */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 1fr;
+    border: 2px solid black;
+    margin: 10px auto;
+    background-color: #FFF;
+}
+
+.list-header { grid-column: 1 / 4; display: grid; grid-template-columns: repeat(5, 1fr); }
+.left-section-container { display: grid; grid-template-rows: repeat(20, 1fr); }
+.center-section-container { display: grid; grid-template-rows: repeat(10, 1fr); }
+.right-section-container { display: grid; grid-template-rows: repeat(10, 1fr); }
+
+/* Шапка листа (Имя и инфо) */
+.char-name-container { grid-column: 1/3; display: flex; align-items: center; }
+.char-info-container { grid-column: 3/6; border: 2px solid black; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); margin: 5px 5px 5px 0; border-radius: 5px; }
+.name-box { width: 100%; height: 50%; border-style: double none double double; display: flex; align-items: center; margin-left: 5px; }
+.name-input { width: 100%; height: 80%; font-size: 30px; background-color: rgb(235, 235, 235); padding: 0 10px; text-align: left; }
+.char-info-box { padding: 0 10px; display: flex; flex-direction: column; justify-content: center; }
+.info-input { text-align: left; border-bottom: 1px solid gray; width: 100%; background-color: rgb(235, 235, 235); }
+.char-main-info-label { margin: 0; font-size: 8px; }
+
+/* Левая секция */
+.all-main-stats-container { grid-row: 1/15; display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+.main-char-stats-container { display: grid; grid-template-rows: repeat(6, 1fr); position: relative; }
+.main-stat-box { display: flex; align-items: center; justify-content: center; }
+.stat-val-box { border: 2px solid black; background-color: white; width: 90%; height: 75%; display: flex; flex-direction: column; align-items: center; position: relative; border-radius: 2px; }
+.char-stat-label { margin: 0; font-size: 8px; text-align: center; margin-top: 2px; font-weight: 700; }
+.char-stat-input { background-color: rgb(235, 235, 235); width: 90%; height: 50%; font-size: 25px; }
+.modify-box { position: absolute; height: 40%; width: 60%; bottom: -8px; display: flex; justify-content: center; align-items: center; border: 2px solid black; background-color: white; border-radius: 50px; }
+.modify-input { background-color: rgb(235, 235, 235); width: 70%; height: 70%; font-size: 12px; }
+
+.char-skills-dice-containee { display: grid; grid-column: 2/4; grid-template-rows: repeat(14, 1fr); }
+.inspiration-container, .profic-bonus-container { display: flex; align-items: center; padding: 0 5px; }
+.inspiration-input { width: 80%; height: 80%; background-color: rgb(235, 235, 235); }
+.insp-input-box { border: 2px solid black; aspect-ratio: 1/1; width: 20%; max-width: 100px; display: flex; justify-content: center; align-items: center; }
+.profic-input-box { border: 2px solid black; border-radius: 10px; aspect-ratio: 1/1; width: 20%; max-width: 100px; display: flex; justify-content: center; align-items: center; }
+.insp-label-box { flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; border-style: solid solid solid none; border-width: 1px; height: 50%; }
+.insp-profic-label { font-size: 10px; margin: 0; text-align: center; }
+
+.save-throws-container { padding-top: 2px; margin: 5px; grid-row: 3/6; display: grid; grid-template-rows: repeat(7, 1fr); border: 2px solid black; border-radius: 5px; }
+.save-throws-item-box { display: flex; align-items: center; }
+.skil-checkbox { height: 60%; aspect-ratio: 1/1; margin: 0 0 0 5px; }
+.skil-val-input { width: 10%; height: 80%; border-bottom: 1px solid gray; font-size: 10px; margin-left: 5px; background-color: rgb(235, 235, 235); }
+.skill-name { margin: 0 0 0 5px; font-size: 10px; }
+.skill-main-label { font-size: 10px; margin: 2px; text-align: center; font-weight: 700; }
+.skills-container { grid-row: 6/15; display: grid; grid-template-rows: repeat(19, 1fr); border: 2px solid black; border-radius: 5px; padding-top: 2px; margin: 5px; }
+.skill-section-name-label { display: flex; align-items: end; justify-content: center; }
+
+.pass-wisdom-container { display: flex; align-items: center; padding: 0 5px; height: 100%; }
+.pass-wis-input { height: 80%; width: 80%; background-color: rgb(235, 235, 235); }
+.pass-wis-input-box { border: 2px solid black; border-radius: 10px; height: 75%; width: 18%; display: flex; align-items: center; justify-content: center; }
+.other-prof-lang-container { grid-row: 16/21; }
+.text-box-area { display: flex; flex-direction: column; align-items: center; border: 2px solid black; border-radius: 5px; margin: 5px; padding: 5px 5px 0 5px; }
+.large-text-input-box { padding: 5px; margin-bottom: 10px; flex: 1; width: 95%; background-color: rgb(235, 235, 235); border-radius: 5px; }
+.large-text-input { padding: 0; height: 100%; width: 100%; margin: 0; resize: none; border: none; background: none; }
+
+/* Центральная секция */
+.battle-container { padding: 5px; display: flex; }
+.batle-grid-container { display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px; width: 100%; }
+.batle-section-container { display: flex; flex-direction: column; border: 2px solid black; border-radius: 5px; padding: 5px; }
+.armor-section-container { display: flex; flex-direction: column; border: 2px solid black; border-radius: 5px 5px 100px 100px; padding: 5px; }
+.armor-main-label { font-size: 10px; margin: 2px; text-align: center; font-weight: 700; width: 50px; }
+.batle-input { width: 100%; height: 100%; font-size: 20px; }
+.large-text-input-box-batle { background-color: rgb(235, 235, 235); border-radius: 5px; padding: 5px; flex: 1; }
+
+.cur-hits-container { display: flex; padding: 5px; }
+.curent-hits-box { border: 2px solid black; border-radius: 5px; display: flex; flex-direction: column; flex: 1; }
+.curent-hit-label { font-size: 10px; margin-right: 5px; white-space: nowrap; }
+.dices-container { display: grid; grid-template-columns: repeat(2, 1fr); padding: 5px; grid-gap: 10px; }
+.deces-mini-box { border: 2px solid black; border-radius: 5px; display: flex; flex-direction: column; }
+.total-hit-label { font-size: 10px; margin-right: 5px; }
+.total-hit-input-box { display: flex; width: 100%; }
+.total-hit-input { background-color: rgb(235, 235, 235); flex: 1; width: 100%; border-bottom: 1px solid gray; }
+.cur-hits-dice-box { background-color: rgb(235, 235, 235); flex: 1; display: flex; margin: 5px; }
+.cur-hits-dice { width: 100%; font-size: 20px; }
+.total-hit-container { display: flex; margin: 5px 5px 0 5px; }
+
+.saves-throws-container { flex: 1; display: flex; flex-direction: column; justify-content: space-around; padding: 5px; }
+.save-line-box { display: flex; justify-content: end; align-items: center; }
+.curent-saves-throws-box { width: 50%; display: flex; gap: 3px; }
+.death-chekbox::before { outline: 2px solid green; border-radius: 0.5rem; }
+
+.attack-container { border: 2px solid black; border-radius: 5px; grid-row: 5/8; display: flex; flex-direction: column; margin: 5px; padding: 10px; }
+.attack-top-section { flex: 1; display: flex; flex-direction: column; }
+.main-weapon-container { display: grid; grid-template-columns: 2fr 1fr 2fr; grid-template-rows: 1fr 3fr 3fr 3fr; grid-gap: 10px; height: 40%; margin-bottom: 10px; }
+.main-atack-label-box { display: flex; align-items: center; }
+.main-atack-label { margin: 0; font-size: 8px; color: gray; }
+.large-text-input-box-for-attack { background-color: rgb(235, 235, 235); border-radius: 5px; padding: 5px; flex: 1; }
+.main-atck-input-box { background-color: rgb(235, 235, 235); border-radius: 5px 0 5px 0; width: 100%; display: flex; }
+.main-atck-input { width: 100%; height: 100%; text-align: start; padding: 0 5px; }
+
+.equipment-container { grid-row: 8/11; display: flex; flex-direction: column; align-items: center; border: 2px solid black; border-radius: 5px; margin: 5px; padding: 5px 5px 5px 5px; }
+.large-text-input-box-for-eauipment { padding: 5px; margin-bottom: 10px; flex: 1; width: 95%; background-color: rgb(235, 235, 235); border-radius: 5px; }
+.equipment-top-section { display: flex; width: 95%; flex: 1; }
+.money-container { display: grid; grid-template-rows: repeat(6, 1fr); height: 100%; width: 25%; }
+.coins-box { display: flex; align-items: center; position: relative; padding-right: 10px; margin-left: 15px; }
+.coin-name-box { background-color: white; border: 1px solid black; position: absolute; height: 40%; width: 40%; left: -25px; display: flex; justify-content: center; align-items: center; z-index: 2; }
+.coin-val-box { flex: 1; height: 70%; border: 1px solid black; border-radius: 5px; padding: 5px; }
+.coin-input { width: 100%; height: 100%; background-color: rgb(235, 235, 235); }
+.coin-type-label { margin: 0; font-size: 10px; }
+
+/* Правая секция */
+.features-container { grid-row: 5 / 11; }
+
+/* =========================================
+   УВЕЛИЧЕНИЕ ШРИФТОВ ДЛЯ ПК (ЧИТАБЕЛЬНОСТЬ)
+   ========================================= */
+
+/* Подписи в шапке (Class, Race и т.д.) */
+.char-main-info-label { font-size: 12px; margin-top: 4px; }
+
+/* Подписи характеристик (Strength, Dexterity...) */
+.char-stat-label { font-size: 12px; margin-bottom: 2px; }
+
+/* Ввод модификаторов в овалах */
+.modify-input { font-size: 16px; font-weight: bold; }
+
+/* Вдохновение и Бонус мастерства */
+.insp-profic-label { font-size: 13px; font-weight: bold; }
+
+/* Названия навыков и спасбросков */
+.skill-name { font-size: 13px; margin-left: 8px; }
+.skil-val-input { font-size: 14px; font-weight: bold; }
+
+/* Главные заголовки блоков (SKILLS, SAVING THROWS, EQUIPMENT и т.д.) */
+.skill-main-label, .armor-main-label { font-size: 13px; letter-spacing: 0.5px; margin: 5px 2px; }
+
+/* Подписи в блоке здоровья (Hit Point Maximum, Total и т.д.) */
+.curent-hit-label, .total-hit-label { font-size: 13px; font-weight: bold; }
+
+/* Подписи в таблице атак (NAME, ATK BONUS, DAMAGE/TYPE) */
+.main-atack-label { font-size: 11px; font-weight: bold; }
+
+/* Названия монеток (CP, SP, EP...) */
+.coin-type-label { font-size: 14px; font-weight: bold; }
+
+/* Немного увеличим чекбоксы, чтобы они соответствовали тексту */
+.skil-checkbox { height: 70%; margin-left: 8px; cursor: pointer; }
+.death-chekbox { width: 16px; height: 16px; cursor: pointer; }
+
+
+
+/* =========================================
+   АДАПТИВНОСТЬ (ИДЕАЛЬНО ДЛЯ ТЕЛЕФОНОВ)
+   ========================================= */
+@media screen and (max-width: 950px) {
+
+    .name-box {
+        border: double black;
+    }
+    /* Убиваем старую сетку и переходим на flex-колонку */
+    .list-main-grid {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        background: transparent;
+        padding: 10px;
+        width: 95%;
+    }
+    
+    .list-header {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .char-info-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .char-info-box {
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #fff;
+        height: 60px;
+    }
+
+    .info-input{
+        height: 100%;
+    }
+
+    /* Сбрасываем жесткие сетки в секциях */
+    .left-section-container, 
+    .center-section-container, 
+    .right-section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 15px;
+    }
+
+    /* --- ЛЕВАЯ СЕКЦИЯ: ЧИНИМ ХАРАКТЕРИСТИКИ --- */
+    .all-main-stats-container {
+        display: block; /* Убираем грид, из-за которого была огромная дыра */
+    }
+
+    .main-char-stats-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на телефоне смотрятся лучше, чем 3 */
+        grid-template-rows: auto;
+        gap: 25px 15px;
+        height: auto;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .main-stat-box {
+        height: 120px; /* Жестко задаем высоту, чтобы не плющило */
+        width: 100%;
+    }
+
+    .stat-val-box {
+        width: 100% !important;
+        height: 100% !important;
+        padding-top: 5px;
+    }
+
+    .char-stat-input {
+        height: 60px; 
+    }
+
+    .modify-box {
+        width: 50px; /* Фиксируем овал */
+        height: 40px;
+        bottom: -12.5px;
+    }
+
+    /* Чиним Бонусы */
+    .char-skills-dice-containee {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .inspiration-container, .profic-bonus-container {
+        height: 60px;
+        padding: 0;
+    }
+
+    .insp-input-box, .profic-input-box {
+        width: 60px;
+        height: 100%;
+    }
+
+    .pass-wisdom-container { 
+        height: 70px;
+        width: 100%;
+    }
+
+    .other-prof-lang-container {
+        width: 100%;
+        margin: 0 auto;
+     }
+
+    /* --- ЦЕНТРАЛЬНАЯ СЕКЦИЯ: БРОНЯ И КУБЫ --- */
+    .batle-grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        height: 90px; /* Даем высоту щиту брони */
+    }
+
+    .armor-section-container {
+        border-radius: 5px 5px 35px 35px;
+        justify-content: center;
+    }
+
+    .dices-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* --- СНАРЯЖЕНИЕ: ЧИНИМ МОНЕТКИ --- */
+    .equipment-top-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .money-container { 
+        display: grid; 
+        grid-template-columns: repeat(5, 1fr); 
+        grid-template-rows: auto;
+        gap: 30px; 
+        width: 100%; 
+        height: 55px; 
+    }
+
+    .coins-box {
+        margin: 0;
+        padding: 0;
+        flex-direction: column;
+        width: 100%;
+        height: 60px;
+    }
+
+    .coin-name-box {
+        position: static; /* Отключаем абсолютное позиционирование */
+        width: 100%;
+        height: 20px;
+        border-radius: 5px 5px 0 0;
+        border-bottom: none;
+    }
+
+    .coin-val-box {
+        width: 100%;
+        border-radius: 0 0 5px 5px;
+        padding: 2px 0;
+    }
+
+    .large-text-input-box-for-eauipment {
+        padding: 5px;
+        margin-bottom: 10px;
+        flex: 1;
+        width: 100%; /* Было 95%, теперь растягиваем на ширину монеток */
+        box-sizing: border-box; /* ВАЖНО: не дает padding-у раздуть блок за пределы 100% */
+        background-color: rgb(235, 235, 235);
+        border-radius: 5px;
+    }
+
+    .cur-hits-dice{
+        height: 50px;
+    }
+
+    .large-text-input {
+        min-height: 200px;
+    }
+
+    .main-weapon-container {
+        height: 150px;
+    }
+
+    /* Скрываем ссылки в шапке на телефоне */
+    .nav-links { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px){
+
+    .name-box {
+        border: double black;
+    }
+    /* Убиваем старую сетку и переходим на flex-колонку */
+    .list-main-grid {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        background: transparent;
+        padding: 10px;
+    }
+    
+    .list-header {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .char-info-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .char-info-box {
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #fff;
+        height: 60px;
+    }
+
+    .info-input{
+        height: 100%;
+    }
+
+    /* Сбрасываем жесткие сетки в секциях */
+    .left-section-container, 
+    .center-section-container, 
+    .right-section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 15px;
+    }
+
+    /* --- ЛЕВАЯ СЕКЦИЯ: ЧИНИМ ХАРАКТЕРИСТИКИ --- */
+    .all-main-stats-container {
+        display: block; /* Убираем грид, из-за которого была огромная дыра */
+    }
+
+    .main-char-stats-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на телефоне смотрятся лучше, чем 3 */
+        grid-template-rows: auto;
+        gap: 25px 15px;
+        height: auto;
+        margin-bottom: 30px;
+    }
+
+    .main-stat-box {
+        height: 120px; /* Жестко задаем высоту, чтобы не плющило */
+        width: 100%;
+    }
+
+    .stat-val-box {
+        width: 100% !important;
+        height: 100% !important;
+        padding-top: 5px;
+    }
+
+    .char-stat-input {
+        height: 60px; 
+    }
+
+    .modify-box {
+        width: 50px; /* Фиксируем овал */
+        height: 40px;
+        bottom: -12.5px;
+    }
+
+    /* Чиним Бонусы */
+    .char-skills-dice-containee {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .inspiration-container, .profic-bonus-container {
+        height: 60px;
+        padding: 0;
+    }
+
+    .insp-input-box, .profic-input-box {
+        width: 60px;
+        height: 100%;
+    }
+
+    .pass-wisdom-container { 
+        height: 70px;
+    }
+
+    /* --- ЦЕНТРАЛЬНАЯ СЕКЦИЯ: БРОНЯ И КУБЫ --- */
+    .batle-grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        height: 90px; /* Даем высоту щиту брони */
+    }
+
+    .armor-section-container {
+        border-radius: 5px 5px 35px 35px;
+        justify-content: center;
+    }
+
+    .dices-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* --- СНАРЯЖЕНИЕ: ЧИНИМ МОНЕТКИ --- */
+    .equipment-top-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .money-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+        width: 100%;
+        height: 55px; /* Фиксируем высоту монет */
+    }
+
+    .coins-box {
+        margin: 0;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .coin-name-box {
+        position: static; /* Отключаем абсолютное позиционирование */
+        width: 100%;
+        height: 20px;
+        border-radius: 5px 5px 0 0;
+        border-bottom: none;
+    }
+
+    .coin-val-box {
+        width: 100%;
+        border-radius: 0 0 5px 5px;
+        padding: 2px 0;
+    }
+
+    .cur-hits-dice{
+        height: 50px;
+    }
+
+    .large-text-input {
+        min-height: 200px;
+    }
+
+    .main-weapon-container {
+        height: 150px;
+    }
+
+    /* Скрываем ссылки в шапке на телефоне */
+    .nav-links { display: none; }
+}
