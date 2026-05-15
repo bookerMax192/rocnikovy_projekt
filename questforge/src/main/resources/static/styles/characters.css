@@ -220,3 +220,228 @@ ul {
     color: var(--primary-red);
     transform: translateY(-2px);
 }
+
+
+
+
+
+
+
+
+
+/* === МОДАЛЬНОЕ ОКНО === */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #FAF9F6;
+            border-radius: 12px;
+            padding: 40px 36px 32px;
+            width: 95%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            position: relative;
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+
+        .modal-close:hover { color: #8B1A1A; }
+
+        .modal h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .modal-field {
+            margin-bottom: 16px;
+        }
+
+        .modal-field label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .modal-field input,
+        .modal-field select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff;
+            color: #222;
+            transition: border-color 0.2s;
+        }
+
+        .modal-field input:focus,
+        .modal-field select:focus {
+            outline: none;
+            border-color: #8B1A1A;
+        }
+
+        .modal-error {
+            color: #8B1A1A;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .modal-submit {
+            width: 100%;
+            padding: 12px;
+            background: #8B1A1A;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .modal-submit:hover { background: #6e1515; }
+        .modal-submit:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* === УВЕДОМЛЕНИЯ === */
+        .toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translate(-50%, 10px);
+            padding: 12px 22px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .toast.success { background: #2d6a4f; }
+        .toast.error   { background: #8B1A1A; }
+
+        /* === СОСТОЯНИЕ ЗАГРУЗКИ === */
+        .loading-text {
+            text-align: center;
+            color: #999;
+            font-size: 1rem;
+            padding: 40px 0;
+        }
+
+        /* === ДИАЛОГ ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ === */
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirm-overlay.active { display: flex; }
+
+        .confirm-box {
+            background: #FAF9F6;
+            border-radius: 12px;
+            padding: 32px 28px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            animation: modalIn 0.2s ease;
+        }
+
+        .confirm-box p {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .confirm-box span {
+            font-size: 0.9rem;
+            color: #666;
+            display: block;
+            margin-bottom: 24px;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .confirm-cancel {
+            padding: 10px 24px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .confirm-cancel:hover { border-color: #aaa; }
+
+        .confirm-delete {
+            padding: 10px 24px;
+            background: #8B1A1A;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .confirm-delete:hover { background: #6e1515; }

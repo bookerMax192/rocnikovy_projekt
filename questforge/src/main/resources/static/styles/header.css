@@ -105,4 +105,8 @@ header {
     .menu-checkbox:checked ~ .nav-links {
         display: flex;
     }
+
+    #header-username {
+        display: none !important;
+    }
 }

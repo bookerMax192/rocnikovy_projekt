@@ -10,7 +10,7 @@
 
     <header class="auth-header">
         <div class="container header-content">
-            <a href="index.html" class="logo text-light">
+            <a href="/" class="logo text-light">
                 <img src="/img/logo.png" alt="QuestForge Logo">
                 QuestForge
             </a>
@@ -24,29 +24,81 @@
     <main class="auth-layout">
         <div class="auth-card">
             <h2>SIGN IN</h2>
-            
-            <form action="#">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="password" required>
-                </div>
-                
-                <button type="submit" class="btn btn-gold w-100">Log In</button>
-            </form>
-            
-            <!-- <button type="button" class="btn btn-outline w-100 btn-google">
-                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Logo">
-                Continue With Google
-            </button> -->
-            
+
+            <div class="form-group">
+                <input type="email" id="login-email" class="form-control" placeholder="Email" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password" class="form-control" placeholder="Password" required="">
+            </div>
+
+            <p class="error-msg" id="login-error">Wrong email or password.</p>
+
+            <button class="btn btn-gold w-100" id="login-btn">Log In</button>            
             <div class="auth-links">
                 <a href="#">Forgot Password?</a>
                 <p>Don't Have An Account Yet? <a href="/register.html" class="accent-link">Sign Up</a></p>
             </div>
         </div>
     </main>
+
+    <script>
+        // Если уже залогинен — сразу на страницу персонажей
+        if (localStorage.getItem('token')) {
+            window.location.href = '/characters';
+        }
+
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            const email    = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorEl  = document.getElementById('login-error');
+            const btn      = document.getElementById('login-btn');
+
+            if (!email || !password) {
+                errorEl.textContent = 'Please fill in all fields.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Logging in...';
+            errorEl.style.display = 'none';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // Сохраняем токен и данные пользователя
+                    localStorage.setItem('token',     data.token);
+                    localStorage.setItem('userName',  data.user_name);
+                    localStorage.setItem('role',      data.role);
+
+                    // Переходим на страницу персонажей
+                    window.location.href = '/characters';
+                } else {
+                    errorEl.textContent = data.error || 'Wrong email or password.';
+                    errorEl.style.display = 'block';
+                }
+            } catch (e) {
+                errorEl.textContent = 'Something went wrong. Try again.';
+                errorEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Log In';
+            }
+        });
+
+        // Логин по Enter
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('login-btn').click();
+        });
+    </script>
 
 </body>
 </html>

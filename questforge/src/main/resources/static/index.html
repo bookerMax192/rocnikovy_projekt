@@ -13,7 +13,7 @@
     <!-- Header Section -->
     <header>
         <div class="container header-content">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="/img/logo.png" alt="QuestForge Logo">
                 QuestForge
             </a>
@@ -21,13 +21,20 @@
             <input type="checkbox" id="mobile-menu" class="menu-checkbox">
             
             <nav class="nav-links">
-                <a href="/characterspage.html">CHARACTERS</a>
-                <a href="/guide.html">GUIDES</a>
+                <a href="/characters">CHARACTERS</a>
+                <a href="/guides">GUIDES</a>
             </nav>
             
             <div class="header-actions">
                 <span class="lang-switch">EN</span>
-                <a href="login.html" class="btn btn-primary">SIGN IN</a>
+
+                <!-- Если не залогинен -->
+                <a href="/login" class="btn btn-primary" id="btn-signin">SIGN IN</a>
+
+                <!-- Если залогинен — скрыто по умолчанию -->
+                <span id="header-username" style="display:none; font-weight:600;"></span>
+                <button class="btn btn-primary" id="btn-signout" 
+                        style="display:none;">SIGN OUT</button>
                 
                 <label for="mobile-menu" class="burger-icon">☰</label>
             </div>
@@ -115,6 +122,33 @@
             <p>Copyright © 2025 QuestForge. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Проверяем токен и меняем шапку
+        const token    = localStorage.getItem('token');
+        const userName = localStorage.getItem('userName');
+
+        if (token && userName) {
+            document.getElementById('btn-signin').style.display    = 'none';
+            document.getElementById('header-username').style.display = 'inline';
+            document.getElementById('btn-signout').style.display   = 'inline-block';
+            document.getElementById('header-username').textContent = userName;
+        }
+
+        document.getElementById('btn-signout').addEventListener('click', async () => {
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+            } catch (e) {}
+            
+            localStorage.removeItem('token');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('role');
+            window.location.href = '/';
+        });
+    </script>
 
 </body>
 </html>

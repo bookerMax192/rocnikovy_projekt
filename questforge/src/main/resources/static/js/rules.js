@@ -252,3 +252,28 @@ document.addEventListener('DOMContentLoaded', () => {
         contentContainer.innerHTML += categoryHTML; // Вставляем на страницу
     });
 });
+
+// Проверяем токен и меняем шапку
+        const token    = localStorage.getItem('token');
+        const userName = localStorage.getItem('userName');
+
+        if (token && userName) {
+            document.getElementById('btn-signin').style.display    = 'none';
+            document.getElementById('header-username').style.display = 'inline';
+            document.getElementById('btn-signout').style.display   = 'inline-block';
+            document.getElementById('header-username').textContent = userName;
+        }
+
+        document.getElementById('btn-signout').addEventListener('click', async () => {
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+            } catch (e) {}
+            
+            localStorage.removeItem('token');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('role');
+            window.location.href = '/';
+        });

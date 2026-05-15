@@ -1,9 +1,12 @@
 package com.questforge.questforge.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "characters")
@@ -28,9 +31,11 @@ public class CharacterSheet {
     @Column
     private Integer level;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "sheet_data", columnDefinition = "jsonb")
     private String sheetData;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

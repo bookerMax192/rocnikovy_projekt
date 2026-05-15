@@ -1,6 +1,4 @@
-/* =========================================
-   БАЗОВЫЕ НАСТРОЙКИ И QUESTFORGE СТИЛИ
-   ========================================= */
+
 :root {
     --primary-red: #8B1A1A;
     --accent-gold: #DAA520;
@@ -204,9 +202,7 @@ input:focus, textarea:focus { outline: none; }
 /* Правая секция */
 .features-container { grid-row: 5 / 11; }
 
-/* =========================================
-   УВЕЛИЧЕНИЕ ШРИФТОВ ДЛЯ ПК (ЧИТАБЕЛЬНОСТЬ)
-   ========================================= */
+
 
 /* Подписи в шапке (Class, Race и т.д.) */
 .char-main-info-label { font-size: 12px; margin-top: 4px; }
@@ -242,9 +238,28 @@ input:focus, textarea:focus { outline: none; }
 
 
 
-/* =========================================
-   АДАПТИВНОСТЬ (ИДЕАЛЬНО ДЛЯ ТЕЛЕФОНОВ)
-   ========================================= */
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background: #2d6a4f; }
+        .toast.error   { background: #8B1A1A; }
+
+
+
 @media screen and (max-width: 950px) {
 
     .name-box {
@@ -298,9 +313,9 @@ input:focus, textarea:focus { outline: none; }
         margin-top: 15px;
     }
 
-    /* --- ЛЕВАЯ СЕКЦИЯ: ЧИНИМ ХАРАКТЕРИСТИКИ --- */
+
     .all-main-stats-container {
-        display: block; /* Убираем грид, из-за которого была огромная дыра */
+        display: block; 
     }
 
     .main-char-stats-container {
@@ -314,7 +329,7 @@ input:focus, textarea:focus { outline: none; }
     }
 
     .main-stat-box {
-        height: 120px; /* Жестко задаем высоту, чтобы не плющило */
+        height: 120px; 
         width: 100%;
     }
 
@@ -380,7 +395,7 @@ input:focus, textarea:focus { outline: none; }
         flex-direction: column;
     }
 
-    /* --- СНАРЯЖЕНИЕ: ЧИНИМ МОНЕТКИ --- */
+    /* --- СНАРЯЖЕНИЕ --- */
     .equipment-top-section {
         flex-direction: column;
         gap: 15px;
@@ -421,8 +436,8 @@ input:focus, textarea:focus { outline: none; }
         padding: 5px;
         margin-bottom: 10px;
         flex: 1;
-        width: 100%; /* Было 95%, теперь растягиваем на ширину монеток */
-        box-sizing: border-box; /* ВАЖНО: не дает padding-у раздуть блок за пределы 100% */
+        width: 100%; 
+        box-sizing: border-box; 
         background-color: rgb(235, 235, 235);
         border-radius: 5px;
     }

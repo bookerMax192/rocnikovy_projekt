@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — QuestForge</title>
+    <link rel="stylesheet" href="/styles/guides.css">
+    <link rel="stylesheet" href="/styles/admin.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <img src="/img/logo.png" alt="QuestForge Logo">
+                QuestForge
+            </a>
+            <input type="checkbox" id="mobile-menu" class="menu-checkbox">
+            <nav class="nav-links">
+                <a href="/characters">CHARACTERS</a>
+                <a href="/guides">GUIDES</a>
+            </nav>
+            <div class="header-actions">
+                <span class="lang-switch">EN</span>
+                <a href="/login" class="btn btn-primary" id="btn-signin">SIGN IN</a>
+                <span id="header-username" style="display:none; font-weight:600;"></span>
+                <button class="btn btn-primary" id="btn-signout" style="display:none;">SIGN OUT</button>
+                <label for="mobile-menu" class="burger-icon">☰</label>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="container">
+            <h1 class="page-title colored-label" style="text-align:center; margin-bottom:10px;">Guild Registry</h1>
+            <p style="text-align:center; color:#666; margin-bottom:30px;">Manage users, assign roles, and maintain order in the realm.</p>
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nickname</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <tr><td colspan="4" style="text-align:center; color:#999; padding:30px;">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно подтверждения -->
+    <div class="confirm-overlay" id="confirm-overlay">
+        <div class="confirm-box">
+            <p>Delete this user?</p>
+            <span id="confirm-username">This action cannot be undone.</span>
+            <div class="confirm-buttons">
+                <button class="confirm-cancel" id="confirm-cancel">Cancel</button>
+                <button class="confirm-delete" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-block footer-info">
+                <div class="footer-logo">QuestForge<span>.</span></div>
+                <p>Your forge of heroes and adventures in the world of Dungeons & Dragons.</p>
+            </div>
+            <div class="footer-block footer-nav">
+                <h4>Contacts</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a>questforge@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-block footer-nav">
+                <h4>Help</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-copyright">
+            <p>Copyright © 2025 QuestForge. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const token    = localStorage.getItem('token');
+        const userName = localStorage.getItem('userName');
+        const role     = localStorage.getItem('role');
+
+        if (!token || role !== 'ADMIN') {
+            window.location.href = '/';
+        }
+
+        if (token && userName) {
+            document.getElementById('btn-signin').style.display      = 'none';
+            document.getElementById('header-username').style.display = 'inline';
+            document.getElementById('btn-signout').style.display     = 'inline-block';
+            document.getElementById('header-username').textContent   = userName;
+        }
+
+        document.getElementById('btn-signout').addEventListener('click', async () => {
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+            } catch (e) {}
+            localStorage.removeItem('token');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('role');
+            window.location.href = '/';
+        });
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/admin', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (res.status === 403) { window.location.href = '/'; return; }
+                const users = await res.json();
+                renderTable(users);
+            } catch (e) {
+                document.getElementById('user-table-body').innerHTML =
+                    '<tr><td colspan="4" style="text-align:center; color:red;">Failed to load users.</td></tr>';
+            }
+        }
+
+        function renderTable(users) {
+            const tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = '';
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#999;">No users found.</td></tr>';
+                return;
+            }
+            users.forEach(function(user) {
+                const row = document.createElement('tr');
+                row.dataset.id = user.idUser;
+                row.innerHTML =
+                    '<td><strong>' + user.userName + '</strong></td>' +
+                    '<td>' + user.email + '</td>' +
+                    '<td>' + user.role + '</td>' +
+                    '<td><button class="btn-delete">Delete</button></td>';
+                row.querySelector('.btn-delete').addEventListener('click', function() {
+                    openConfirm(user.idUser, user.userName);
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        var deleteTargetId = null;
+
+        function openConfirm(id, username) {
+            deleteTargetId = id;
+            document.getElementById('confirm-username').textContent = 'User: ' + username;
+            document.getElementById('confirm-overlay').classList.add('active');
+        }
+
+        document.getElementById('confirm-cancel').addEventListener('click', function() {
+            document.getElementById('confirm-overlay').classList.remove('active');
+            deleteTargetId = null;
+        });
+
+        document.getElementById('confirm-delete').addEventListener('click', async function() {
+            if (!deleteTargetId) return;
+            document.getElementById('confirm-overlay').classList.remove('active');
+            try {
+                const res = await fetch('/api/admin/' + deleteTargetId, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (res.status === 204) {
+                    const row = document.querySelector('tr[data-id="' + deleteTargetId + '"]');
+                    if (row) row.remove();
+                }
+            } catch (e) {}
+            deleteTargetId = null;
+        });
+
+        loadUsers();
+    </script>
+</body>
+</html>

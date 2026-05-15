@@ -198,3 +198,17 @@ a {
 .auth-links .accent-link:hover {
     text-decoration: underline;
 }
+
+.success-msg {
+    color: #2d6a4f;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.error-msg {
+    color: #8B1A1A;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    display: none;
+}

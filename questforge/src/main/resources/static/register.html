@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up — QuestForge</title>
-    <!-- Используем тот же файл стилей! -->
     <link rel="stylesheet" href="/styles/sign.css">
 </head>
 <body class="auth-page">
 
-    <!-- Плавающая шапка (без белого фона) -->
     <header class="auth-header">
         <div class="container header-content">
-            <a href="index.html" class="logo text-light">
+            <a href="/" class="logo text-light">
                 <img src="/img/logo.png" alt="QuestForge Logo">
                 QuestForge
             </a>
@@ -23,44 +21,104 @@
         </div>
     </header>
 
-    <!-- Секция с формой -->
     <main class="auth-layout">
         <div class="auth-card">
             <h2>SIGN UP</h2>
             
-            <form action="#">
-                <!-- Добавлено поле Email -->
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email Address" required>
-                </div>
-                
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" required>
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required>
-                </div>
-                
-                <!-- Добавлено поле подтверждения пароля -->
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" required>
-                </div>
-                
-                <!-- Изменен текст кнопки -->
-                <button type="submit" class="btn btn-gold w-100">Create Account</button>
-            </form>
-            
-            <!-- <button type="button" class="btn btn-outline w-100 btn-google">
-                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Logo">
-                Sign Up With Google
-            </button> -->
+            <div class="form-group">
+                <input type="email" id="reg-email" class="form-control" placeholder="Email Address" required="">
+            </div>
+            <div class="form-group">
+                <input type="text" id="reg-username" class="form-control" placeholder="Username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" id="reg-password" class="form-control" placeholder="Password" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" id="reg-confirm" class="form-control" placeholder="Confirm Password" required="">
+            </div>
+
+            <p class="error-msg" id="reg-error"></p>
+            <p class="success-msg" id="reg-success">Account created! Redirecting...</p>
+
+            <button class="btn btn-gold w-100" id="reg-btn">Create Account</button>
             
             <div class="auth-links">
-                <p>Already Have An Account? <a href="/login.html" class="accent-link">Sign In</a></p>
+                <p>Already Have An Account? <a href="/login" class="accent-link">Sign In</a></p>
             </div>
         </div>
     </main>
+
+    <script>
+        document.getElementById('reg-btn').addEventListener('click', async () => {
+            const email    = document.getElementById('reg-email').value.trim();
+            const username = document.getElementById('reg-username').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+            const confirm  = document.getElementById('reg-confirm').value.trim();
+            const errorEl  = document.getElementById('reg-error');
+            const successEl = document.getElementById('reg-success');
+            const btn      = document.getElementById('reg-btn');
+
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
+
+            // Валидация на фронтенде
+            if (!email || !username || !password || !confirm) {
+                errorEl.textContent = 'Please fill in all fields.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            if (password !== confirm) {
+                errorEl.textContent = 'Passwords do not match.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            // По SRS: минимум 8 символов, буквы + цифры + спецсимволы
+            const strongPassword = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+            if (!strongPassword.test(password)) {
+                errorEl.textContent = 'Password must be at least 8 characters and include letters, numbers, and special characters (!@#$%^&*).';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating...';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_name: username, email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    successEl.style.display = 'block';
+                    // Через 1.5 секунды переходим на логин
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1500);
+                } else {
+                    errorEl.textContent = data.error || 'Something went wrong.';
+                    errorEl.style.display = 'block';
+                }
+            } catch (e) {
+                errorEl.textContent = 'Something went wrong. Try again.';
+                errorEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+            }
+        });
+
+        // Регистрация по Enter
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('reg-btn').click();
+        });
+    </script>
 
 </body>
 </html>
